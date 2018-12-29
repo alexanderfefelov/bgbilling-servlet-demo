@@ -17,6 +17,11 @@ public class DemoServlet extends HttpServlet {
     }
 
     @Override
+    public void destroy() {
+        logger.trace("destroy");
+    }
+
+    @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         logger.trace("doGet");
         PrintWriter writer = response.getWriter();

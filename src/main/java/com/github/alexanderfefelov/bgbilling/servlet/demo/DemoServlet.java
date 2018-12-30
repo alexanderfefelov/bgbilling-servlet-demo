@@ -1,6 +1,7 @@
 package com.github.alexanderfefelov.bgbilling.servlet.demo;
 
 import org.apache.log4j.Logger;
+import ru.bitel.common.logging.NestedContext;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -13,45 +14,82 @@ public class DemoServlet extends HttpServlet {
 
     @Override
     public void init() throws ServletException {
-        logger.trace("init");
+        try {
+            NestedContext.push(LOG_CONTEXT);
+            logger.trace("init");
+        } finally {
+            NestedContext.pop();
+        }
     }
 
     @Override
     public void destroy() {
-        logger.trace("destroy");
+        try {
+            NestedContext.push(LOG_CONTEXT);
+            logger.trace("destroy");
+        } finally {
+            NestedContext.pop();
+        }
     }
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        logger.trace("doGet");
-        PrintWriter writer = response.getWriter();
-        writer.println("Hello, World!");
+        try {
+            NestedContext.push(LOG_CONTEXT);
+            logger.trace("doGet");
+            PrintWriter writer = response.getWriter();
+            writer.println("Hello, World!");
+        } finally {
+            NestedContext.pop();
+        }
     }
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        logger.trace("doPost");
-        super.doPost(request, response);
+        try {
+            NestedContext.push(LOG_CONTEXT);
+            logger.trace("doPost");
+            super.doPost(request, response);
+        } finally {
+            NestedContext.pop();
+        }
     }
 
     @Override
     protected void doPut(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        logger.trace("doPut");
-        super.doPut(request, response);
+        try {
+            NestedContext.push(LOG_CONTEXT);
+            logger.trace("doPut");
+            super.doPut(request, response);
+        } finally {
+            NestedContext.pop();
+        }
     }
 
     @Override
     protected void doDelete(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        logger.trace("doDelete");
-        super.doDelete(request, response);
+        try {
+            NestedContext.push(LOG_CONTEXT);
+            logger.trace("doDelete");
+            super.doDelete(request, response);
+        } finally {
+            NestedContext.pop();
+        }
     }
 
     @Override
     protected void doHead(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        logger.trace("doHead");
-        super.doHead(request, response);
+        try {
+            NestedContext.push(LOG_CONTEXT);
+            logger.trace("doHead");
+            super.doHead(request, response);
+        } finally {
+            NestedContext.pop();
+        }
     }
 
     private Logger logger = Logger.getLogger(this.getClass());
+
+    private static final String LOG_CONTEXT = "servlet";
 
 }

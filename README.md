@@ -23,10 +23,13 @@ mvn package
 
 jar-файл, созданный в результате в каталоге `target`, скопируйте в каталог `lib/ext` сервера BGBilling.
 
-В конфигурацию BGBilling добавьте это:
+В конфигурацию BGBilling добавьте:
 
 ```
 custom.servlet.keys=DemoServlet
+#                    /
+#                   |
+#                   v
 custom.servlet.DemoServlet.class=com.github.alexanderfefelov.bgbilling.servlet.demo.DemoServlet
 custom.servlet.DemoServlet.mapping=/demo-servlet
 ```

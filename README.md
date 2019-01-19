@@ -21,7 +21,7 @@ cd bgbilling-servlet-demo
 mvn package
 ```
 
-jar-файл, созданный в результате в каталоге `target`, скопируйте в каталог `lib/ext` сервера BGBilling.
+jar-файл, созданный в результате в каталоге `target`, скопируйте в каталог `lib/app` сервера BGBilling.
 
 В конфигурацию BGBilling добавьте:
 

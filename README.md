@@ -92,4 +92,4 @@ Hello, World!
 ## Что дальше?
 
 * Ознакомьтесь с [описанием технологии Servlet](https://docs.oracle.com/javaee/7/tutorial/servlets.htm).
-* Посмотрите [аналогичный проект](https://github.com/alexanderfefelov/bgbilling-servlet-demo-scala) на языке Scala.
+* Посмотрите аналогичные проекты на языках [Scala](https://github.com/alexanderfefelov/bgbilling-servlet-demo-scala) и [Kotlin](https://github.com/alexanderfefelov/bgbilling-servlet-demo-kotlin).

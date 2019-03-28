@@ -32,6 +32,9 @@ custom.servlet.keys=DemoServlet
 #                   v
 custom.servlet.DemoServlet.class=com.github.alexanderfefelov.bgbilling.servlet.demo.DemoServlet
 custom.servlet.DemoServlet.mapping=/demo-servlet
+#                                  \------+-----/
+#                                         |
+#                              Part of URL after /bgbilling
 ```
 
 Перезапустите сервер BGBilling.
@@ -92,4 +95,5 @@ Hello, World!
 ## Что дальше?
 
 * Ознакомьтесь с [описанием технологии Servlet](https://docs.oracle.com/javaee/7/tutorial/servlets.htm).
-* Посмотрите аналогичные проекты на языках [Scala](https://github.com/alexanderfefelov/bgbilling-servlet-demo-scala) и [Kotlin](https://github.com/alexanderfefelov/bgbilling-servlet-demo-kotlin).
+* Посмотрите аналогичные проекты на языках [Scala](https://github.com/alexanderfefelov/bgbilling-servlet-demo-scala), [Kotlin](https://github.com/alexanderfefelov/bgbilling-servlet-demo-kotlin)
+  и [Clojure](https://github.com/alexanderfefelov/bgbilling-servlet-demo-clojure).

@@ -25,9 +25,9 @@
         <dependency>
             <groupId>bgbilling</groupId>
             <artifactId>kernel</artifactId>
-            <version>7.1_1076</version>
+            <version>8.0_1321</version>
             <scope>system</scope>
-            <systemPath>${project.basedir}/lib/bgbilling-kernel-7.1_1076.jar</systemPath>
+            <systemPath>${project.basedir}/lib/bgbilling-kernel-8.0_1321.jar</systemPath>
         </dependency>
     </dependencies>
 

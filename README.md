@@ -2,8 +2,7 @@
 
 ## Что это?
 
-bgbilling-servlet-demo -- это демонстрационная реализация сервлета для использования совместно
-с сервером [BGBilling](https://bgbilling.ru/). 
+bgbilling-servlet-demo - это демонстрационная реализация сервлета для использования совместно с сервером [BGBilling](https://bgbilling.ru/). 
 
 ## Требования
 
@@ -16,30 +15,33 @@ bgbilling-servlet-demo -- это демонстрационная реализа
 Выполните команды:
 
 ```
-git clone https://github.com/alexanderfefelov/bgbilling-servlet-demo.git
+git clone https://github.com/alexanderfefelov/bgbilling-servlet-demo
 cd bgbilling-servlet-demo
 mvn package
 ```
 
-jar-файл, созданный в результате в каталоге `target`, скопируйте в каталог `lib/app` сервера BGBilling.
+jar-файл, созданный в результате в каталоге `target`, скопируйте в каталог `lib/app` вашего экземпляра BGBilling.
 
 В конфигурацию BGBilling добавьте:
 
-```
+```properties
 custom.servlet.keys=DemoServlet
-#                    /
-#                   |
-#                   v
+#                   │         │
+#                   └─┬───────┘                             class
+#                     │                                       │
+#              ┌──────┴──┐       ┌────────────────────────────┴───────────────────────────────┐
+#              │         │       │                                                            │
 custom.servlet.DemoServlet.class=com.github.alexanderfefelov.bgbilling.servlet.demo.DemoServlet
 custom.servlet.DemoServlet.mapping=/demo-servlet
-#                                  \------+-----/
-#                                         |
-#                              Part of URL after /bgbilling
+#                                  │           │
+#                                  └─────┬─────┘
+#                                        │
+#                            Part of URL after /bgbilling
 ```
 
 Перезапустите сервер BGBilling.
 
-Для проверки выполните
+Для проверки выполните:
 
 ```
 curl --request GET --include http://YOUR.BGBILLING.HOST:8080/bgbilling/demo-servlet
@@ -95,5 +97,7 @@ Hello, World!
 ## Что дальше?
 
 * Ознакомьтесь с [описанием технологии Servlet](https://docs.oracle.com/javaee/7/tutorial/servlets.htm).
-* Посмотрите аналогичные проекты на языках [Scala](https://github.com/alexanderfefelov/bgbilling-servlet-demo-scala), [Kotlin](https://github.com/alexanderfefelov/bgbilling-servlet-demo-kotlin)
-  и [Clojure](https://github.com/alexanderfefelov/bgbilling-servlet-demo-clojure).
+* Посмотрите аналогичные проекты на других языках:
+  * Clojure - https://github.com/alexanderfefelov/bgbilling-servlet-demo-clojure,
+  * Kotlin - https://github.com/alexanderfefelov/bgbilling-servlet-demo-kotlin,
+  * Scala - https://github.com/alexanderfefelov/bgbilling-servlet-demo-scala.

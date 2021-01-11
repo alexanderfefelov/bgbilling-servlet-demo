@@ -20,14 +20,16 @@ cd bgbilling-servlet-demo
 mvn package
 ```
 
-jar-файл, созданный в результате в каталоге `target`, скопируйте в каталог `lib/app` вашего экземпляра BGBilling.
+Скопируйте jar-файл, созданный в результате в каталоге `target`, в каталог `lib/custom` вашего экземпляра BGBilling.
 
 В конфигурацию BGBilling добавьте:
 
 ```properties
 custom.servlet.keys=DemoServlet
 #                   │         │
-#                   └─┬───────┘                             class
+#                   └─┬───────┘
+#                     │
+#                   Ключ                                    Класс
 #                     │                                       │
 #              ┌──────┴──┐       ┌────────────────────────────┴───────────────────────────────┐
 #              │         │       │                                                            │
@@ -36,37 +38,58 @@ custom.servlet.DemoServlet.mapping=/demo-servlet
 #                                  │           │
 #                                  └─────┬─────┘
 #                                        │
-#                            Part of URL after /bgbilling
+#                            Часть URL после контекста
 ```
 
-Перезапустите сервер BGBilling.
+Перезапустите BGBilling.
 
-Для проверки выполните:
+Если всё в порядке, в логах должно появиться:
 
 ```
-curl --request GET --include http://YOUR.BGBILLING.HOST:8080/bgbilling/demo-servlet
+01-11/21:16:31  INFO [main] Server - Add custom servlet from setup...
+01-11/21:16:31  INFO [main] Server - Custom.servlet.keys => DemoServlet
+01-11/21:16:31  INFO [main] Server - Custom.servlet.class => com.github.alexanderfefelov.bgbilling.servlet.demo.DemoServlet
+01-11/21:16:31  INFO [main] Server - Custom.servlet.mapping => /demo-servlet
+01-11/21:16:31  INFO [main] Server - Add mapping: com.github.alexanderfefelov.bgbilling.servlet.demo.DemoServlet to /demo-servlet
 ```
 
-В ответ вы получите что-то вроде такого:
+Теперь выполните:
+
+```
+http --verbose --check-status \
+  GET http://bgbilling-server.backpack.test:63081/billing/demo-servlet
+```
+
+В результате на запрос:
+
+```
+GET /billing/demo-servlet HTTP/1.1
+Accept: */*
+Accept-Encoding: gzip, deflate
+Connection: keep-alive
+Host: bgbilling-server.backpack.test:63081
+User-Agent: HTTPie/1.0.3
+```
+
+будет получен ответ:
 
 ```
 HTTP/1.1 200 OK
 Content-Length: 14
-Date: Sun, 30 Dec 2018 06:40:53 GMT
+Date: Mon, 11 Jan 2021 18:23:31 GMT
 
 Hello, World!
 ```
 
 ## Логи
 
-С дефолтными настройками BGBilling все логи из сервлета будут попадать в файл `log/server.log`.
-Для того, чтобы логи собирались в отдельном файле, необходимо изменить `data/log4j.xml`.
+Для того, чтобы собирать логи сервлета в отдельный файл, необходимо изменить `data/log4j.xml`.
 
 Добавьте новый аппендер:
 
 ```xml
 <appender name="SERVLET" class="org.apache.log4j.RollingFileAppender">
-    <param name="File" value="${log.dir.path}${log.prefix}.servlet.log"/>
+    <param name="File" value="/BGBillingServer/log/servlet.log"/>
     <param name="MaxFileSize" value="100MB"/>
     <param name="MaxBackupIndex" value="2"/>
     <param name="Append" value="true"/>
@@ -88,8 +111,8 @@ Hello, World!
 <appender name="ASYNC" class="ru.bitel.common.logging.Log4jAsyncAppender">
     <appender-ref ref="APPLICATION"/>
     <appender-ref ref="MQ"/>
-    <appender-ref ref="SERVLET"/>
     <appender-ref ref="SCRIPT"/>
+    <appender-ref ref="SERVLET"/>
     <appender-ref ref="ERROR"/>
 </appender>
 ```

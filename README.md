@@ -43,7 +43,7 @@ custom.servlet.DemoServlet.mapping=/demo-servlet
 
 Перезапустите BGBilling.
 
-Если всё в порядке, в логах должно появиться:
+Если всё в порядке, в логах можно будет увидеть:
 
 ```
 01-11/21:16:31  INFO [main] Server - Add custom servlet from setup...
@@ -89,9 +89,9 @@ Hello, World!
 
 ```xml
 <appender name="SERVLET" class="org.apache.log4j.RollingFileAppender">
-    <param name="File" value="/BGBillingServer/log/servlet.log"/>
-    <param name="MaxFileSize" value="100MB"/>
-    <param name="MaxBackupIndex" value="2"/>
+    <param name="File" value="log/servlet.log"/>
+    <param name="MaxFileSize" value="50MB"/>
+    <param name="MaxBackupIndex" value="3"/>
     <param name="Append" value="true"/>
 
     <layout class="org.apache.log4j.PatternLayout">
@@ -110,10 +110,10 @@ Hello, World!
 ```xml
 <appender name="ASYNC" class="ru.bitel.common.logging.Log4jAsyncAppender">
     <appender-ref ref="APPLICATION"/>
+    <appender-ref ref="ERROR"/>
     <appender-ref ref="MQ"/>
     <appender-ref ref="SCRIPT"/>
     <appender-ref ref="SERVLET"/>
-    <appender-ref ref="ERROR"/>
 </appender>
 ```
 

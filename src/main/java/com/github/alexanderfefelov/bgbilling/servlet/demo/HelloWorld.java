@@ -37,6 +37,7 @@ public class HelloWorld extends HttpServlet {
         try {
             NestedContext.push(LOG_CONTEXT);
             logger.trace("doGet");
+
             PrintWriter writer = response.getWriter();
             writer.println("Hello, World!");
         } finally {

@@ -35,7 +35,7 @@ custom.servlet.keys=HelloWorld
 #                   │        │
 #                   └─┬──────┘
 #                     │
-#                   Ключ                                   Класс
+#               Ключ сервлета                         Класс сервлета
 #                     │                                      │
 #              ┌──────┴─┐       ┌────────────────────────────┴──────────────────────────────┐
 #              │        │       │                                                           │
@@ -45,6 +45,21 @@ custom.servlet.HelloWorld.mapping=/demo-servlet/hello-world
 #                                 └───────────┬───────────┘
 #                                             │
 #                                 Часть URL после контекста
+#
+custom.servlet.HelloWorld.filter.keys=TerryPratchett
+#                                     │            │
+#                                     └───┬────────┘
+#                                         │
+#                                    Ключ фильтра
+#                                         │
+#                                ┌────────┴───┐
+#                                │            │
+custom.servlet.HelloWorld.filter.TerryPratchett.name=TerryPratchett
+custom.servlet.HelloWorld.filter.TerryPratchett.class=com.github.alexanderfefelov.bgbilling.servlet.demo.TerryPratchettFilter
+#                                                     │                                                                     │
+#                                                     └──────────────────────────────┬──────────────────────────────────────┘
+#                                                                                    │
+#                                                                              Класс фильтра
 ```
 
 Перезапустите BGBilling.
@@ -52,11 +67,12 @@ custom.servlet.HelloWorld.mapping=/demo-servlet/hello-world
 Если всё в порядке, в логах можно будет увидеть:
 
 ```
-01-13/09:28:20  INFO [main] Server - Add custom servlet from setup...
-01-13/09:28:20  INFO [main] Server - Custom.servlet.keys => HelloWorld
-01-13/09:28:20  INFO [main] Server - Custom.servlet.class => com.github.alexanderfefelov.bgbilling.servlet.demo.HelloWorld
-01-13/09:28:20  INFO [main] Server - Custom.servlet.mapping => /demo-servlet/hello-world
-01-13/09:28:20  INFO [main] Server - Add mapping: com.github.alexanderfefelov.bgbilling.servlet.demo.HelloWorld to /demo-servlet/hello-world
+01-13/14:13:03  INFO [main] Server - Add custom servlet from setup...
+01-13/14:13:03  INFO [main] Server - Custom.servlet.keys => HelloWorld
+01-13/14:13:03  INFO [main] Server - Custom.servlet.class => com.github.alexanderfefelov.bgbilling.servlet.demo.HelloWorld
+01-13/14:13:03  INFO [main] Server - Custom.servlet.mapping => /demo-servlet/hello-world
+01-13/14:13:03  INFO [main] Server - Add mapping: com.github.alexanderfefelov.bgbilling.servlet.demo.HelloWorld to /demo-servlet/hello-world
+01-13/14:13:03  INFO [main] Server - Add mapping: com.github.alexanderfefelov.bgbilling.servlet.demo.TerryPratchettFilter to /demo-servlet/hello-world
 ```
 
 Теперь выполните:
@@ -82,7 +98,8 @@ User-Agent: HTTPie/1.0.3
 ```
 HTTP/1.1 200 OK
 Content-Length: 14
-Date: Wed, 13 Jan 2021 06:30:12 GMT
+Date: Wed, 13 Jan 2021 11:14:37 GMT
+X-Clacks-Overhead: GNU Terry Pratchett
 
 Hello, World!
 ```
@@ -121,6 +138,15 @@ Hello, World!
     <appender-ref ref="SCRIPT"/>
     <appender-ref ref="SERVLET"/>
 </appender>
+```
+
+В результате после перезапуска BGBilling в файле `log/servlet.log` можно будет увидеть что-то вроде:
+
+```
+01-13/14:13:11 TRACE [localhost.localdomain-startStop-1] TerryPratchettFilter - init
+01-13/14:14:37 TRACE [http-nio-0.0.0.0-8080-exec-4] HelloWorld - init
+01-13/14:14:37 TRACE [http-nio-0.0.0.0-8080-exec-4] TerryPratchettFilter - doFilter
+01-13/14:14:37 TRACE [http-nio-0.0.0.0-8080-exec-4] HelloWorld - doGet
 ```
 
 ## Что дальше?

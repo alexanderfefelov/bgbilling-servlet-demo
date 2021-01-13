@@ -2,7 +2,7 @@
 
 ## Что это?
 
-bgbilling-servlet-demo - это демонстрационная реализация сервлета для использования совместно с сервером [BGBilling](https://bgbilling.ru/). 
+bgbilling-servlet-demo - это демонстрационная реализация сервлетов для использования совместно с сервером [BGBilling](https://bgbilling.ru/). 
 
 ## Требования
 
@@ -10,7 +10,7 @@ bgbilling-servlet-demo - это демонстрационная реализа�
 * JDK 8
 * [Maven](https://maven.apache.org/)
 
-## Как это запустить? 
+## Как это установить? 
 
 Выполните команды:
 
@@ -22,23 +22,29 @@ mvn package
 
 Скопируйте jar-файл, созданный в результате в каталоге `target`, в каталог `lib/custom` вашего экземпляра BGBilling.
 
+## Привет, мир!
+
+[HelloWorld.java](src/main/java/com/github/alexanderfefelov/bgbilling/servlet/demo/HelloWorld.java)
+
 В конфигурацию BGBilling добавьте:
 
 ```properties
-custom.servlet.keys=DemoServlet
-#                   │         │
-#                   └─┬───────┘
+# Servlet: Привет, мир!
+#
+custom.servlet.keys=HelloWorld
+#                   │        │
+#                   └─┬──────┘
 #                     │
-#                   Ключ                                    Класс
-#                     │                                       │
-#              ┌──────┴──┐       ┌────────────────────────────┴───────────────────────────────┐
-#              │         │       │                                                            │
-custom.servlet.DemoServlet.class=com.github.alexanderfefelov.bgbilling.servlet.demo.DemoServlet
-custom.servlet.DemoServlet.mapping=/demo-servlet
-#                                  │           │
-#                                  └─────┬─────┘
-#                                        │
-#                            Часть URL после контекста
+#                   Ключ                                   Класс
+#                     │                                      │
+#              ┌──────┴─┐       ┌────────────────────────────┴──────────────────────────────┐
+#              │        │       │                                                           │
+custom.servlet.HelloWorld.class=com.github.alexanderfefelov.bgbilling.servlet.demo.HelloWorld
+custom.servlet.HelloWorld.mapping=/demo-servlet/hello-world
+#                                 │                       │
+#                                 └───────────┬───────────┘
+#                                             │
+#                                 Часть URL после контекста
 ```
 
 Перезапустите BGBilling.
@@ -46,24 +52,24 @@ custom.servlet.DemoServlet.mapping=/demo-servlet
 Если всё в порядке, в логах можно будет увидеть:
 
 ```
-01-11/21:16:31  INFO [main] Server - Add custom servlet from setup...
-01-11/21:16:31  INFO [main] Server - Custom.servlet.keys => DemoServlet
-01-11/21:16:31  INFO [main] Server - Custom.servlet.class => com.github.alexanderfefelov.bgbilling.servlet.demo.DemoServlet
-01-11/21:16:31  INFO [main] Server - Custom.servlet.mapping => /demo-servlet
-01-11/21:16:31  INFO [main] Server - Add mapping: com.github.alexanderfefelov.bgbilling.servlet.demo.DemoServlet to /demo-servlet
+01-13/09:28:20  INFO [main] Server - Add custom servlet from setup...
+01-13/09:28:20  INFO [main] Server - Custom.servlet.keys => HelloWorld
+01-13/09:28:20  INFO [main] Server - Custom.servlet.class => com.github.alexanderfefelov.bgbilling.servlet.demo.HelloWorld
+01-13/09:28:20  INFO [main] Server - Custom.servlet.mapping => /demo-servlet/hello-world
+01-13/09:28:20  INFO [main] Server - Add mapping: com.github.alexanderfefelov.bgbilling.servlet.demo.HelloWorld to /demo-servlet/hello-world
 ```
 
 Теперь выполните:
 
 ```
 http --verbose --check-status \
-  GET http://bgbilling-server.backpack.test:63081/billing/demo-servlet
+  GET http://bgbilling-server.backpack.test:63081/billing/demo-servlet/hello-world
 ```
 
 В результате на запрос:
 
 ```
-GET /billing/demo-servlet HTTP/1.1
+GET /billing/demo-servlet/hello-world HTTP/1.1
 Accept: */*
 Accept-Encoding: gzip, deflate
 Connection: keep-alive
@@ -76,14 +82,14 @@ User-Agent: HTTPie/1.0.3
 ```
 HTTP/1.1 200 OK
 Content-Length: 14
-Date: Mon, 11 Jan 2021 18:23:31 GMT
+Date: Wed, 13 Jan 2021 06:30:12 GMT
 
 Hello, World!
 ```
 
 ## Логи
 
-Для того, чтобы собирать логи сервлета в отдельный файл, необходимо изменить `data/log4j.xml`.
+Для того, чтобы собирать логи сервлетов в отдельный файл, необходимо изменить `data/log4j.xml`.
 
 Добавьте новый аппендер:
 

@@ -265,10 +265,12 @@ Memory free / max / total, MB: 156 / 444 / 307
 В результате после перезапуска BGBilling в файле `log/servlet.log` можно будет увидеть что-то вроде:
 
 ```
-01-13/14:13:11 TRACE [localhost.localdomain-startStop-1] TerryPratchettFilter - init
-01-13/14:14:37 TRACE [http-nio-0.0.0.0-8080-exec-4] HelloWorld - init
-01-13/14:14:37 TRACE [http-nio-0.0.0.0-8080-exec-4] TerryPratchettFilter - doFilter
-01-13/14:14:37 TRACE [http-nio-0.0.0.0-8080-exec-4] HelloWorld - doGet
+01-13/21:55:19 TRACE [localhost.localdomain-startStop-1] UptimePuncherFilter - init
+01-13/21:55:19 TRACE [localhost.localdomain-startStop-1] TerryPratchettFilter - init
+01-13/21:55:20 TRACE [http-nio-0.0.0.0-8080-exec-1] SysInfo - init
+01-13/21:55:20 TRACE [http-nio-0.0.0.0-8080-exec-1] UptimePuncherFilter - doFilter
+01-13/21:55:20 TRACE [http-nio-0.0.0.0-8080-exec-1] TerryPratchettFilter - doFilter
+01-13/21:55:20 TRACE [http-nio-0.0.0.0-8080-exec-1] SysInfo - doGet
 ```
 
 ## Что дальше?

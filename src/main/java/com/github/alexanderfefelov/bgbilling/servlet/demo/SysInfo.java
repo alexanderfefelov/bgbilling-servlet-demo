@@ -118,6 +118,7 @@ public class SysInfo extends HttpServlet {
             kernelVer.getModuleName(),
             kernelVer.getVersionString()
         ));
+        buffer.append(NL);
         List<BGModule> modules = ModuleCache.getInstance().getModulesList();
         for (BGModule module : modules) {
             VersionInfo ver = VersionInfo.getVersionInfo(module.getName());

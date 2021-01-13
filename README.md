@@ -202,17 +202,16 @@ User-Agent: HTTPie/1.0.3
 HTTP/1.1 200 OK
 Access-Control-Allow-Credentials: true
 Access-Control-Allow-Origin: http://example.com
-Content-Length: 561
-Date: Wed, 13 Jan 2021 18:37:50 GMT
+Content-Length: 488
+Date: Wed, 13 Jan 2021 18:55:20 GMT
 Vary: Origin
-X-BGBilling-Server-Uptime: Started: 13.01.2021 21:34:47 Uptime: 0 d 00:03:03
+X-BGBilling-Server-Uptime: Started: 13.01.2021 21:55:07 Uptime: 0 d 00:00:12
 X-Clacks-Overhead: GNU Terry Pratchett
 
 Modules
 --------------------------------------------------
 
-0 kernel 8.0.1320 / 16.12.2020 18:10:087 card 8.0.307 / 06.10.2020 01:52:21
-6 card 8.0.307 / 06.10.2020 01:52:21
+0 kernel 8.0.1320 / 16.12.2020 18:10:08
 2 inet 8.0.832 / 15.12.2020 17:06:32
 1 card 8.0.307 / 06.10.2020 01:52:21
 3 npay 8.0.287 / 19.11.2020 18:41:17
@@ -224,7 +223,7 @@ Runtime
 
 Hostname/IP address: bgbilling-server.backpack.test/172.17.0.8
 Available processors: 8
-Memory free / max / total, MB: 225 / 444 / 356
+Memory free / max / total, MB: 156 / 444 / 307
 ```
 
 ## Логи

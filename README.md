@@ -24,7 +24,8 @@ mvn package
 
 ## Привет, мир!
 
-[HelloWorld.java](src/main/java/com/github/alexanderfefelov/bgbilling/servlet/demo/HelloWorld.java)
+- [HelloWorld.java](src/main/java/com/github/alexanderfefelov/bgbilling/servlet/demo/HelloWorld.java)
+- [TerryPratchettFilter.java](src/main/java/com/github/alexanderfefelov/bgbilling/servlet/demo/TerryPratchettFilter.java)
 
 В конфигурацию BGBilling добавьте:
 
@@ -102,6 +103,128 @@ Date: Wed, 13 Jan 2021 11:14:37 GMT
 X-Clacks-Overhead: GNU Terry Pratchett
 
 Hello, World!
+```
+
+## О системе
+
+- [SysInfo.java](src/main/java/com/github/alexanderfefelov/bgbilling/servlet/demo/SysInfo.java)
+- [UptimePuncherFilter.java](src/main/java/com/github/alexanderfefelov/bgbilling/servlet/demo/UptimePuncherFilter.java)
+
+Добавьте в конфигурацию BGBilling:
+
+```properties
+# Servlet: О системе
+#
+custom.servlet.keys=SysInfo
+#                   │     │
+#                   └─┬───┘
+#                     │
+#             Ключ сервлета                       Класс сервлета
+#                  │                                     │
+#              ┌───┴─┐       ┌───────────────────────────┴────────────────────────────┐
+#              │     │       │                                                        │
+custom.servlet.SysInfo.class=com.github.alexanderfefelov.bgbilling.servlet.demo.SysInfo
+custom.servlet.SysInfo.mapping=/demo-servlet/sys-info
+#                              │                    │
+#                              └──────────┬─────────┘
+#                                         │
+#                             Часть URL после контекста
+#
+custom.servlet.SysInfo.filter.keys=UptimePuncher,TerryPratchett,CORS
+#                                  │           │ │            │ │  │
+#                                  └───┬───────┘ └─────┬──────┘ └─┬┘
+#                                      │               │          │
+#                                 Ключ фильтра    Ещё фильтр    И ещё один
+#                                      │
+#                             ┌────────┴──┐
+#                             │           │
+custom.servlet.SysInfo.filter.UptimePuncher.name=UptimePuncher
+custom.servlet.SysInfo.filter.UptimePuncher.class=com.github.alexanderfefelov.bgbilling.servlet.demo.UptimePuncherFilter
+#                                                 │                                                                    │
+#                                                 └──────────────────────────────┬─────────────────────────────────────┘
+#                                                                                │
+#                                                                          Класс фильтра
+custom.servlet.SysInfo.filter.TerryPratchett.name=TerryPratchett
+custom.servlet.SysInfo.filter.TerryPratchett.class=com.github.alexanderfefelov.bgbilling.servlet.demo.TerryPratchettFilter
+custom.servlet.SysInfo.filter.CORS.name=CORS
+custom.servlet.SysInfo.filter.CORS.class=org.apache.catalina.filters.CorsFilter
+custom.servlet.SysInfo.filter.CORS.init-param.keys=AllowedOrigins
+#                                                  │            │
+#                                                  └───┬────────┘
+#                                                      │
+#                                                Ключ параметра    Название параметра
+#                                                      │                    │
+#                                             ┌────────┴───┐      ┌─────────┴────────┐
+#                                             │            │      │                  │
+custom.servlet.SysInfo.filter.CORS.init-param.AllowedOrigins.name=cors.allowed.origins
+custom.servlet.SysInfo.filter.CORS.init-param.AllowedOrigins.value=*
+#                                                                  │
+#                                                                  │
+#                                                         Значение параметра
+```
+
+Перезапустите BGBilling.
+
+Теперь в логах будет так:
+
+```
+01-13/21:07:35  INFO [main] Server - Add custom servlet from setup...
+01-13/21:07:35  INFO [main] Server - Custom.servlet.keys => SysInfo
+01-13/21:07:35  INFO [main] Server - Custom.servlet.class => com.github.alexanderfefelov.bgbilling.servlet.demo.SysInfo
+01-13/21:07:35  INFO [main] Server - Custom.servlet.mapping => /demo-servlet/sys-info
+01-13/21:07:35  INFO [main] Server - Add mapping: com.github.alexanderfefelov.bgbilling.servlet.demo.SysInfo to /demo-servlet/sys-info
+01-13/21:07:35  INFO [main] Server - Add mapping: com.github.alexanderfefelov.bgbilling.servlet.demo.UptimePuncherFilter to /demo-servlet/sys-info
+01-13/21:07:35  INFO [main] Server - Add mapping: com.github.alexanderfefelov.bgbilling.servlet.demo.TerryPratchettFilter to /demo-servlet/sys-info
+01-13/21:07:35  INFO [main] Server - Add mapping: org.apache.catalina.filters.CorsFilter to /demo-servlet/sys-info
+```
+
+и в ответ на запрос:
+
+```
+http --verbose --check-status \
+  GET http://bgbilling-server.backpack.test:63081/billing/demo-servlet/sys-info \
+    "Origin: http://example.com"
+```
+
+```
+GET /billing/demo-servlet/sys-info HTTP/1.1
+Accept: */*
+Accept-Encoding: gzip, deflate
+Connection: keep-alive
+Host: bgbilling-server.backpack.test:63081
+Origin: http://example.com
+User-Agent: HTTPie/1.0.3
+```
+
+вы получите:
+
+```
+HTTP/1.1 200 OK
+Access-Control-Allow-Credentials: true
+Access-Control-Allow-Origin: http://example.com
+Content-Length: 561
+Date: Wed, 13 Jan 2021 18:37:50 GMT
+Vary: Origin
+X-BGBilling-Server-Uptime: Started: 13.01.2021 21:34:47 Uptime: 0 d 00:03:03
+X-Clacks-Overhead: GNU Terry Pratchett
+
+Modules
+--------------------------------------------------
+
+0 kernel 8.0.1320 / 16.12.2020 18:10:087 card 8.0.307 / 06.10.2020 01:52:21
+6 card 8.0.307 / 06.10.2020 01:52:21
+2 inet 8.0.832 / 15.12.2020 17:06:32
+1 card 8.0.307 / 06.10.2020 01:52:21
+3 npay 8.0.287 / 19.11.2020 18:41:17
+5 subscription 8.0.128 / 06.10.2020 01:52:39
+4 rscm 8.0.272 / 06.10.2020 01:52:36
+
+Runtime
+--------------------------------------------------
+
+Hostname/IP address: bgbilling-server.backpack.test/172.17.0.8
+Available processors: 8
+Memory free / max / total, MB: 225 / 444 / 356
 ```
 
 ## Логи

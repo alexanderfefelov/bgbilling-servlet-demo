@@ -276,6 +276,7 @@ Memory free / max / total, MB: 156 / 444 / 307
 ## Что дальше?
 
 * Ознакомьтесь с [описанием технологии Servlet](https://docs.oracle.com/javaee/7/tutorial/servlets.htm).
+* Изучите [список фильтров, встроенных в Tomcat 8.5](https://tomcat.apache.org/tomcat-8.5-doc/config/filter.html).
 * Посмотрите аналогичные проекты на других языках:
   * Clojure - https://github.com/alexanderfefelov/bgbilling-servlet-demo-clojure,
   * Kotlin - https://github.com/alexanderfefelov/bgbilling-servlet-demo-kotlin,

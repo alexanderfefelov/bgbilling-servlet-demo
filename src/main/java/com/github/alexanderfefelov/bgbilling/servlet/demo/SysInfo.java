@@ -98,6 +98,28 @@ public class SysInfo extends HttpServlet {
         }
     }
 
+    @Override
+    protected void doOptions(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        try {
+            NestedContext.push(LOG_CONTEXT);
+            logger.trace("doOptions");
+            super.doOptions(request, response);
+        } finally {
+            NestedContext.pop();
+        }
+    }
+
+    @Override
+    protected void doTrace(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        try {
+            NestedContext.push(LOG_CONTEXT);
+            logger.trace("doTrace");
+            super.doTrace(request, response);
+        } finally {
+            NestedContext.pop();
+        }
+    }
+
     private String collectSysInfo() throws BGException, UnknownHostException {
         return String.join(NL,
             collectModules(),

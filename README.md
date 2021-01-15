@@ -279,5 +279,6 @@ Memory free / max / total, MB: 156 / 444 / 307
 * Изучите [список фильтров, встроенных в Tomcat 8.5](https://tomcat.apache.org/tomcat-8.5-doc/config/filter.html).
 * Посмотрите аналогичные проекты на других языках:
   * Clojure - https://github.com/alexanderfefelov/bgbilling-servlet-demo-clojure,
+  * Groovy - https://github.com/alexanderfefelov/bgbilling-servlet-demo-groovy,
   * Kotlin - https://github.com/alexanderfefelov/bgbilling-servlet-demo-kotlin,
   * Scala - https://github.com/alexanderfefelov/bgbilling-servlet-demo-scala.

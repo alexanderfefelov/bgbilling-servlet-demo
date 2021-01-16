@@ -15,7 +15,6 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
-import java.util.List;
 
 public class SysInfo extends HttpServlet {
 
@@ -130,9 +129,7 @@ public class SysInfo extends HttpServlet {
     private String collectModules() {
         StringBuilder buffer = new StringBuilder();
         buffer.append(String.join(NL,
-            "Modules",
-            HR,
-            NL
+            "Modules", HR, NL
         ));
         VersionInfo kernelVer = VersionInfo.getVersionInfo("server");
         buffer.append(String.join(SPACE,
@@ -141,8 +138,7 @@ public class SysInfo extends HttpServlet {
             kernelVer.getVersionString()
         ));
         buffer.append(NL);
-        List<BGModule> modules = ModuleCache.getInstance().getModulesList();
-        for (BGModule module : modules) {
+        for (BGModule module : ModuleCache.getInstance().getModulesList()) {
             VersionInfo ver = VersionInfo.getVersionInfo(module.getName());
             buffer.append(String.join(SPACE,
                 String.valueOf(module.getId()),
@@ -157,13 +153,10 @@ public class SysInfo extends HttpServlet {
     private String collectRuntime() throws UnknownHostException {
         StringBuilder buffer = new StringBuilder();
         buffer.append(String.join(NL,
-            "Runtime",
-            HR,
-            NL
+            "Runtime", HR, NL
         ));
-        InetAddress ipAddress = InetAddress.getLocalHost();
         buffer.append(String.join(NL,
-            "Hostname/IP address: " + ipAddress,
+            "Hostname/IP address: " + InetAddress.getLocalHost(),
             "Available processors: " + Runtime.getRuntime().availableProcessors(),
             "Memory free / max / total, MB: "
                 + Runtime.getRuntime().freeMemory() / MB + " / "

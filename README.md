@@ -2,7 +2,7 @@
 
 ## Что это?
 
-bgbilling-servlet-demo - это демонстрационная реализация сервлетов и фильтров для использования совместно с сервером [BGBilling](https://bgbilling.ru/).
+bgbilling-servlet-demo - это демонстрационная реализация сервлетов и фильтров для использования совместно с сервером [BGBilling](https://bgbilling.ru/). 
 
 ## Требования
 
@@ -282,3 +282,6 @@ Memory free / max / total, MB: 156 / 444 / 307
   * Groovy - https://github.com/alexanderfefelov/bgbilling-servlet-demo-groovy,
   * Kotlin - https://github.com/alexanderfefelov/bgbilling-servlet-demo-kotlin,
   * Scala - https://github.com/alexanderfefelov/bgbilling-servlet-demo-scala.
+* Посмотрите, как можно расширить функционал BGBilling с помощью других механизмов:
+  * Dynaction - https://github.com/alexanderfefelov/bgbilling-dynaction-demo, 
+  * Dynservice - https://github.com/alexanderfefelov/bgbilling-dynservice-demo.

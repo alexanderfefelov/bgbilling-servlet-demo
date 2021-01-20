@@ -2,7 +2,7 @@
 
 ## Что это?
 
-bgbilling-servlet-demo - это демонстрационная реализация сервлетов и фильтров для использования совместно с сервером [BGBilling](https://bgbilling.ru/). 
+bgbilling-servlet-demo — это демонстрационная реализация сервлетов и фильтров для использования совместно с сервером [BGBilling](https://bgbilling.ru/). 
 
 ## Требования
 
@@ -14,7 +14,7 @@ bgbilling-servlet-demo - это демонстрационная реализа�
 
 Выполните команды:
 
-```
+```bash
 git clone https://github.com/alexanderfefelov/bgbilling-servlet-demo
 cd bgbilling-servlet-demo
 mvn package
@@ -78,9 +78,13 @@ custom.servlet.HelloWorld.filter.TerryPratchett.class=com.github.alexanderfefelo
 
 Теперь выполните:
 
-```
+```bash
 http --verbose --check-status \
   GET http://bgbilling-server.backpack.test:63081/billing/demo-servlet/hello-world
+#                                                        │                       │
+#                                                        └───────────┬───────────┘
+#                                                                    │
+#                                                        Часть URL после контекста
 ```
 
 В результате на запрос:
@@ -105,7 +109,7 @@ X-Clacks-Overhead: GNU Terry Pratchett
 Hello, World!
 ```
 
-## О системе
+## О системе — взаимодействуем с BGBilling
 
 - [SysInfo.java](src/main/java/com/github/alexanderfefelov/bgbilling/servlet/demo/SysInfo.java)
 - [UptimePuncherFilter.java](src/main/java/com/github/alexanderfefelov/bgbilling/servlet/demo/UptimePuncherFilter.java)
@@ -180,10 +184,14 @@ custom.servlet.SysInfo.filter.CORS.init-param.AllowedOrigins.value=*
 
 и в ответ на запрос:
 
-```
+```bash
 http --verbose --check-status \
   GET http://bgbilling-server.backpack.test:63081/billing/demo-servlet/sys-info \
     "Origin: http://example.com"
+#                                                        │                    │
+#                                                        └─────────┬──────────┘
+#                                                                  │
+#                                                      Часть URL после контекста
 ```
 
 ```
@@ -278,10 +286,10 @@ Memory free / max / total, MB: 156 / 444 / 307
 * Ознакомьтесь с [описанием технологии Servlet](https://docs.oracle.com/javaee/7/tutorial/servlets.htm).
 * Изучите [список фильтров, встроенных в Tomcat 8.5](https://tomcat.apache.org/tomcat-8.5-doc/config/filter.html).
 * Посмотрите аналогичные проекты на других языках:
-  * Clojure - https://github.com/alexanderfefelov/bgbilling-servlet-demo-clojure,
-  * Groovy - https://github.com/alexanderfefelov/bgbilling-servlet-demo-groovy,
-  * Kotlin - https://github.com/alexanderfefelov/bgbilling-servlet-demo-kotlin,
-  * Scala - https://github.com/alexanderfefelov/bgbilling-servlet-demo-scala.
+  * Clojure — https://github.com/alexanderfefelov/bgbilling-servlet-demo-clojure,
+  * Groovy — https://github.com/alexanderfefelov/bgbilling-servlet-demo-groovy,
+  * Kotlin — https://github.com/alexanderfefelov/bgbilling-servlet-demo-kotlin,
+  * Scala — https://github.com/alexanderfefelov/bgbilling-servlet-demo-scala.
 * Посмотрите, как можно расширить функционал BGBilling с помощью других механизмов:
-  * Dynaction - https://github.com/alexanderfefelov/bgbilling-dynaction-demo, 
-  * Dynservice - https://github.com/alexanderfefelov/bgbilling-dynservice-demo.
+  * Dynaction — https://github.com/alexanderfefelov/bgbilling-dynaction-demo, 
+  * Dynservice — https://github.com/alexanderfefelov/bgbilling-dynservice-demo.
